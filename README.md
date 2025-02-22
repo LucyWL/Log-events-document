@@ -274,3 +274,805 @@ When a player interacts with an in-game object, specific variables related to th
   }
 }
 ```
+### Quest Event
+When a player starts or finishes a part of a specific unit, such as the "Beam Me Up, DANI!" in unit 1, this event type can be generated:
+
+- **questID:** A unique ID is assigned to each quest.
+- **questName:** The descriptive name given to a quest ID. Example names include:
+  - “U1 – Welcome to WAT247”
+  - “U1 – An Amazing AI”
+  - “U1 – Time to Argue”
+- **questEventType:** Specifies the event type for the quest. This variable has two possible values:
+  - **QuestActiveEvent:** Represents the log record when the student accepted a new quest.
+  - **QuestCompleteEvent:** Represents the log record when the student completes a quest.
+
+#### Example JSON format
+```json
+{
+  "itemID": "abc123-unique",
+  "installID": "device-001",
+  "buildType": "Production",
+  "buildVersion": "v2.0.1",
+  "playerName": "Alice",
+  "playerId": "player_001",
+  "groupType": "instructor-led",
+  "platform": "Windows",
+  "timestamp": "2025-02-20 14:30:00",
+  "timezone": "UTC+2",
+  "playerPosition": {
+    "X": 10.5,
+    "Y": 20.0,
+    "Z": 5.5
+  },
+  "cameraRotation": {
+    "X": 0.0,
+    "Y": 90.0,
+    "Z": 0.0
+  },
+  "performance": {
+    "memory": "8GB",
+    "frame/sec": 60,
+    "others": "N/A"
+  },
+  "replayNumber": 3,
+  "sceneNames": [
+    "Unit 1_space ship",
+    "Unit 2_alien dungeon"
+  ],
+  "regionName": "Sector 1",
+  "questTable": {
+    "activeQuests": [
+      "quest3"
+    ],
+    "completedQuests": [
+      "quest1",
+      "quest2"
+    ]
+  },
+  "taskTable": {
+    "activeTasks": [
+      "task3"
+    ],
+    "completedTasks": [
+      "task1",
+      "task2"
+    ]
+  },
+  "eventType": "questEvent",
+  "specificEventDetail": {
+    "questID": "quest3",
+    "questName": "Beam Me Up, DANI!",
+    "questEventType": "QuestActiveEvent"
+  }
+}
+```
+### Task Event
+When a player receives or completes a task within a part of a certain unit, such as the "U1 – Welcome to WAT247" in unit 1, this event type can be generated:
+
+- **questID:** A unique ID assigned to each quest.
+- **taskID:** A unique ID given to each task.
+- **taskName:** The descriptive name given to a task. Example names include “wakeup”, “arfRoom”, “topoTalk.”
+- **taskEventType:** Specifies the event type for the task. This variable has three possible values: 1) **taskActiveEvent:** Represents the log record when the student accepted a new task. 2) **taskCompleteEvent:** Represents the log record when the student completes a task. 3) **taskProgressEvent:** Represents the log record for in-task progress, such as when the player achieves a milestone (e.g., collecting evidence).
+- **progressContent:** Records the specific progress achieved within the task, such as the details of the collected evidence.
+
+#### Example JSON format
+```json
+{
+  "itemID": "abc123-unique",
+  "installID": "device-001",
+  "buildType": "Production",
+  "buildVersion": "v2.0.1",
+  "playerName": "Alice",
+  "playerId": "player_001",
+  "groupType": "instructor-led",
+  "platform": "Windows",
+  "timestamp": "2025-02-20 14:30:00",
+  "timezone": "UTC+2",
+  "playerPosition": {
+    "X": 10.5,
+    "Y": 20.0,
+    "Z": 5.5
+  },
+  "cameraRotation": {
+    "X": 0.0,
+    "Y": 90.0,
+    "Z": 0.0
+  },
+  "performance": {
+    "memory": "8GB",
+    "frame/sec": 60,
+    "others": "N/A"
+  },
+  "replayNumber": 3,
+  "sceneNames": [
+    "Unit 1_space ship",
+    "Unit 2_alien dungeon"
+  ],
+  "regionName": "Sector 1",
+  "questTable": {
+    "activeQuests": [
+      "quest3"
+    ],
+    "completedQuests": [
+      "quest1",
+      "quest2"
+    ]
+  },
+  "taskTable": {
+    "activeTasks": [
+      "task3"
+    ],
+    "completedTasks": [
+      "task1",
+      "task2"
+    ]
+  },
+  "eventType": "taskEvent",
+  "specificEventDetail": {
+    "questID": "quest3",
+    "taskID": "task3",
+    "taskName": "topoTalk",
+    "taskEventType": "taskProgressEvent",
+    "progressContent": "Collected evidence near the waterfall"
+  }
+}
+```
+### Dialogue Event
+This log event will be captured when a player triggers a dialogue box during the gameplay. The description regarding specific variables under the variable of "specificEventDetail" can be found:
+
+- **dialogueID:** A unique ID assigned to each dialogue section.
+- **dialogueEventType:** Specifies the type of dialogue event. It has two possible values: 1) **DialogueStartEvent:** Generated when players start a dialogue section. 2) **DialogueFinishEvent:** Generated when players end a dialogue section.
+
+#### Example JSON format
+```json
+{
+  "itemID": "abc123-unique",
+  "installID": "device-001",
+  "buildType": "Production",
+  "buildVersion": "v2.0.1",
+  "playerName": "Alice",
+  "playerId": "player_001",
+  "groupType": "instructor-led",
+  "platform": "Windows",
+  "timestamp": "2025-02-20 14:30:00",
+  "timezone": "UTC+2",
+  "playerPosition": {
+    "X": 10.5,
+    "Y": 20.0,
+    "Z": 5.5
+  },
+  "cameraRotation": {
+    "X": 0.0,
+    "Y": 90.0,
+    "Z": 0.0
+  },
+  "performance": {
+    "memory": "8GB",
+    "frame/sec": 60,
+    "others": "N/A"
+  },
+  "replayNumber": 3,
+  "sceneNames": [
+    "Unit 1_space ship",
+    "Unit 2_alien dungeon"
+  ],
+  "regionName": "Sector 1",
+  "questTable": {
+    "activeQuests": [
+      "quest3"
+    ],
+    "completedQuests": [
+      "quest1",
+      "quest2"
+    ]
+  },
+  "taskTable": {
+    "activeTasks": [
+      "task3"
+    ],
+    "completedTasks": [
+      "task1",
+      "task2"
+    ]
+  },
+  "eventType": "dialogueEvent",
+  "specificEventDetail": {
+    "dialogueID": "dialogue123",
+    "dialogueEventType": "DialogueStartEvent"
+  }
+}
+```
+### Dialogue Node Event
+This log event will be captured when a player triggers a dialogue box during the gameplay. The description regarding specific variables under the variable of "specificEventDetail" can be found:
+
+- **dialogueID:** A unique ID is assigned to each dialogue section.
+- **dialogueNodeID:** A unique ID assigned to the dialogue box, which contains the choice nodes, within the corresponding dialogue section.
+- **choiceID:** The ID of the choice selected by the student. (Leave it as `null` when `dialogueNodeEventType` equals to “DialogueNodeStartEvent.”)
+- **dialogueNodeEventType:** Specifies the event type for the dialogue node. It has two possible values: 1) **DialogueNodeStartEvent:** Generated when players start a dialogue box that contains choice nodes. 2) **DialogueNodeFinishEvent:** Generated when players make a choice and move on to the next dialogue box.
+
+#### Example JSON format
+```json
+{
+  "itemID": "abc123-unique",
+  "installID": "device-001",
+  "buildType": "Production",
+  "buildVersion": "v2.0.1",
+  "playerName": "Alice",
+  "playerId": "player_001",
+  "groupType": "instructor-led",
+  "platform": "Windows",
+  "timestamp": "2025-02-20 14:30:00",
+  "timezone": "UTC+2",
+  "playerPosition": {
+    "X": 10.5,
+    "Y": 20.0,
+    "Z": 5.5
+  },
+  "cameraRotation": {
+    "X": 0.0,
+    "Y": 90.0,
+    "Z": 0.0
+  },
+  "performance": {
+    "memory": "8GB",
+    "frame/sec": 60,
+    "others": "N/A"
+  },
+  "replayNumber": 3,
+  "sceneNames": [
+    "Unit 1_space ship",
+    "Unit 2_alien dungeon"
+  ],
+  "regionName": "Sector 1",
+  "questTable": {
+    "activeQuests": [
+      "quest3"
+    ],
+    "completedQuests": [
+      "quest1",
+      "quest2"
+    ]
+  },
+  "taskTable": {
+    "activeTasks": [
+      "task3"
+    ],
+    "completedTasks": [
+      "task1",
+      "task2"
+    ]
+  },
+  "eventType": "dialogueNodeEvent",
+  "specificEventDetail": {
+    "dialogueID": "dialogue123",
+    "dialogueNodeID": "node456",
+    "choiceID": null,
+    "dialogueNodeEventType": "DialogueNodeStartEvent"
+  }
+}
+```
+### Movement Event
+This log event will be captured when a player navigates or moves around during the gameplay. The description regarding specific variables under the variable of "specificEventDetail" can be found:
+
+- **actionName:** Specifies the specific movement action. Potential values include:
+  - "forwardMove", "leftMove", "rightMove", "backMove", "jump"
+  - or corresponding keyboard keys: "W", "A", "D", "S", and "Space."
+- **state:** Indicates whether the movement event marks an action's beginning or end. Typical values: "Start" and "End."
+- **isToggleHoverboardUsed:** A binary variable indicating whether the player uses the Toggle hoverboard for navigation. Possible values: "Yes" and "No."
+
+#### Example JSON format
+```json
+{
+  "itemID": "abc123-unique",
+  "installID": "device-001",
+  "buildType": "Production",
+  "buildVersion": "v2.0.1",
+  "playerName": "Alice",
+  "playerId": "player_001",
+  "groupType": "instructor-led",
+  "platform": "Windows",
+  "timestamp": "2025-02-20 14:30:00",
+  "timezone": "UTC+2",
+  "playerPosition": {
+    "X": 10.5,
+    "Y": 20.0,
+    "Z": 5.5
+  },
+  "cameraRotation": {
+    "X": 0.0,
+    "Y": 90.0,
+    "Z": 0.0
+  },
+  "performance": {
+    "memory": "8GB",
+    "frame/sec": 60,
+    "others": "N/A"
+  },
+  "replayNumber": 3,
+  "sceneNames": [
+    "Unit 1_space ship",
+    "Unit 2_alien dungeon"
+  ],
+  "regionName": "Sector 1",
+  "questTable": {
+    "activeQuests": [
+      "quest3"
+    ],
+    "completedQuests": [
+      "quest1",
+      "quest2"
+    ]
+  },
+  "taskTable": {
+    "activeTasks": [
+      "task3"
+    ],
+    "completedTasks": [
+      "task1",
+      "task2"
+    ]
+  },
+  "eventType": "movementEvent",
+  "specificEventDetail": {
+    "actionName": "forwardMove",
+    "state": "start",
+    "isToggleHoverboardUsed": "No"
+  }
+}
+```
+### DANI Menu Event
+This log event will be captured when a player opens the panel containing different tools within the game by using the "Tab" keyboard. The description regarding specific variables under the variable of "specificEventDetail" can be found:
+
+- **actionName:** Specifies the action for this event type. It has two possible values: 1) **DANIMenuOpenEvent:** Occurs when the player presses the "Tab" keyboard button to open the in-game tool panel. 2) **DANIMenuCloseEvent:** Occurs when the player closes the in-game tool panel.
+
+#### Example JSON format
+```json
+{
+  "itemID": "abc123-unique",
+  "installID": "device-001",
+  "buildType": "Production",
+  "buildVersion": "v2.0.1",
+  "playerName": "Alice",
+  "playerId": "player_001",
+  "groupType": "instructor-led",
+  "platform": "Windows",
+  "timestamp": "2025-02-20 14:30:00",
+  "timezone": "UTC+2",
+  "playerPosition": {
+    "X": 10.5,
+    "Y": 20.0,
+    "Z": 5.5
+  },
+  "cameraRotation": {
+    "X": 0.0,
+    "Y": 90.0,
+    "Z": 0.0
+  },
+  "performance": {
+    "memory": "8GB",
+    "frame/sec": 60,
+    "others": "N/A"
+  },
+  "replayNumber": 3,
+  "sceneNames": [
+    "Unit 1_space ship",
+    "Unit 2_alien dungeon"
+  ],
+  "regionName": "Sector 1",
+  "questTable": {
+    "activeQuests": [
+      "quest3"
+    ],
+    "completedQuests": [
+      "quest1",
+      "quest2"
+    ]
+  },
+  "taskTable": {
+    "activeTasks": [
+      "task3"
+    ],
+    "completedTasks": [
+      "task1",
+      "task2"
+    ]
+  },
+  "eventType": "DANIMenuEvent",
+  "specificEventDetail": {
+    "actionName": "DANIMenuOpenEvent"
+  }
+}
+```
+### DANI Feature Event
+This log event will be captured when a player opens the panel containing different tools within the game by using the "Tab" keyboard. The description regarding specific variables under the variable of "specificEventDetail" can be found:
+
+- **featureName:** The name of the tool. Example names include: 1)"map," 2)"background info," and 3)"chat log."
+- **actionName:** Specifies the action for this event type. It has two possible values: 1) **arfFeatureOpenEvent:** Occurs when the player presses the "Tab" keyboard button to open the in-game tool panel. 2) **arfFeatureCloseEvent:** Occurs when the player closes the in-game tool panel.
+
+#### Example JSON format
+```json
+{
+  "itemID": "abc123-unique",
+  "installID": "device-001",
+  "buildType": "Production",
+  "buildVersion": "v2.0.1",
+  "playerName": "Alice",
+  "playerId": "player_001",
+  "groupType": "instructor-led",
+  "platform": "Windows",
+  "timestamp": "2025-02-20 14:30:00",
+  "timezone": "UTC+2",
+  "playerPosition": {
+    "X": 10.5,
+    "Y": 20.0,
+    "Z": 5.5
+  },
+  "cameraRotation": {
+    "X": 0.0,
+    "Y": 90.0,
+    "Z": 0.0
+  },
+  "performance": {
+    "memory": "8GB",
+    "frame/sec": 60,
+    "others": "N/A"
+  },
+  "replayNumber": 3,
+  "sceneNames": [
+    "Unit 1_space ship",
+    "Unit 2_alien dungeon"
+  ],
+  "regionName": "Sector 1",
+  "questTable": {
+    "activeQuests": [
+      "quest3"
+    ],
+    "completedQuests": [
+      "quest1",
+      "quest2"
+    ]
+  },
+  "taskTable": {
+    "activeTasks": [
+      "task3"
+    ],
+    "completedTasks": [
+      "task1",
+      "task2"
+    ]
+  },
+  "eventType": "DANIFeatureEvent",
+  "specificEventDetail": {
+    "featureName": "map",
+    "actionName": "arfFeatureOpenEvent"
+  }
+}
+```
+### DANI Feature Event
+This log event will be captured when a player chooses a specific tool within the tool panel. The description regarding specific variables under the variable of "specificEventDetail" can be found:
+
+- **featureName:** The name of the tool. Example names include: 1)"map," 2)"background info," and 3)"chat log."
+- **actionName:** Specifies the action for this event type. It has two possible values: 1) **arfFeatureOpenEvent:** Occurs when the player presses the "Tab" keyboard button to open the in-game tool panel. 2) **arfFeatureCloseEvent:** Occurs when the player closes the in-game tool panel.
+
+#### Example JSON format
+```json
+{
+  "itemID": "abc123-unique",
+  "installID": "device-001",
+  "buildType": "Production",
+  "buildVersion": "v2.0.1",
+  "playerName": "Alice",
+  "playerId": "player_001",
+  "groupType": "instructor-led",
+  "platform": "Windows",
+  "timestamp": "2025-02-20 14:30:00",
+  "timezone": "UTC+2",
+  "playerPosition": {
+    "X": 10.5,
+    "Y": 20.0,
+    "Z": 5.5
+  },
+  "cameraRotation": {
+    "X": 0.0,
+    "Y": 90.0,
+    "Z": 0.0
+  },
+  "performance": {
+    "memory": "8GB",
+    "frame/sec": 60,
+    "others": "N/A"
+  },
+  "replayNumber": 3,
+  "sceneNames": [
+    "Unit 1_space ship",
+    "Unit 2_alien dungeon"
+  ],
+  "regionName": "Sector 1",
+  "questTable": {
+    "activeQuests": [
+      "quest3"
+    ],
+    "completedQuests": [
+      "quest1",
+      "quest2"
+    ]
+  },
+  "taskTable": {
+    "activeTasks": [
+      "task3"
+    ],
+    "completedTasks": [
+      "task1",
+      "task2"
+    ]
+  },
+  "eventType": "DANIFeatureEvent",
+  "specificEventDetail": {
+    "featureName": "map",
+    "actionName": "arfFeatureOpenEvent"
+  }
+}
+```
+### Hotkey Event
+This log event will be captured when a player presses a key on the keyboard to access a specific feature quickly. The description regarding specific variables under the variable of "specificEventDetail" can be found:
+
+- **keyName:** Specifies which keyboard button the player pressed. Example buttons include: "Tab," "B," "M," and "Q."
+- **description:** Provides a descriptive name for the keyboard button. For example: "Tab" corresponds to "DANI tool menu;" "B" corresponds to "backing Information;" "M" corresponds to "map;" "Q" corresponds to "quests."
+
+#### Example JSON format
+```json
+{
+  "itemID": "abc123-unique",
+  "installID": "device-001",
+  "buildType": "Production",
+  "buildVersion": "v2.0.1",
+  "playerName": "Alice",
+  "playerId": "player_001",
+  "groupType": "instructor-led",
+  "platform": "Windows",
+  "timestamp": "2025-02-20 14:30:00",
+  "timezone": "UTC+2",
+  "playerPosition": {
+    "X": 10.5,
+    "Y": 20.0,
+    "Z": 5.5
+  },
+  "cameraRotation": {
+    "X": 0.0,
+    "Y": 90.0,
+    "Z": 0.0
+  },
+  "performance": {
+    "memory": "8GB",
+    "frame/sec": 60,
+    "others": "N/A"
+  },
+  "replayNumber": 3,
+  "sceneNames": [
+    "Unit 1_space ship",
+    "Unit 2_alien dungeon"
+  ],
+  "regionName": "Sector 1",
+  "questTable": {
+    "activeQuests": [
+      "quest3"
+    ],
+    "completedQuests": [
+      "quest1",
+      "quest2"
+    ]
+  },
+  "taskTable": {
+    "activeTasks": [
+      "task3"
+    ],
+    "completedTasks": [
+      "task1",
+      "task2"
+    ]
+  },
+  "eventType": "hotkeyEvent",
+  "specificEventDetail": {
+    "keyName": "Tab",
+    "description": "DANI tool menu."
+  }
+}
+```
+### Topographic Map Event
+This log event will be captured when a player conducts actions within the topographic map. The description regarding specific variables under the variable of "specificEventDetail" can be found:
+
+- **featureUsed:** Indicates which feature on the map is used, such as the topographic level button or a waypoint.
+- **actionType:** Describes the specific action conducted by the player. Example values include: "Drag," "Drop," "Select," and "Unselect."
+- **locationInfo:** Provides details about where the player moved the waypoint on the topographic map.
+
+#### Example JSON format
+```json
+{
+  "itemID": "abc123-unique",
+  "installID": "device-001",
+  "buildType": "Production",
+  "buildVersion": "v2.0.1",
+  "playerName": "Alice",
+  "playerId": "player_001",
+  "groupType": "instructor-led",
+  "platform": "Windows",
+  "timestamp": "2025-02-20 14:30:00",
+  "timezone": "UTC+2",
+  "playerPosition": {
+    "X": 10.5,
+    "Y": 20.0,
+    "Z": 5.5
+  },
+  "cameraRotation": {
+    "X": 0.0,
+    "Y": 90.0,
+    "Z": 0.0
+  },
+  "performance": {
+    "memory": "8GB",
+    "frame/sec": 60,
+    "others": "N/A"
+  },
+  "replayNumber": 3,
+  "sceneNames": [
+    "Unit 1_space ship",
+    "Unit 2_alien dungeon"
+  ],
+  "regionName": "Sector 1",
+  "questTable": {
+    "activeQuests": [
+      "quest3"
+    ],
+    "completedQuests": [
+      "quest1",
+      "quest2"
+    ]
+  },
+  "taskTable": {
+    "activeTasks": [
+      "task3"
+    ],
+    "completedTasks": [
+      "task1",
+      "task2"
+    ]
+  },
+  "eventType": "topographicMapEvent",
+  "specificEventDetail": {
+    "featureUsed": "waypoint",
+    "actionType": "Drag",
+    "locationInfo": "(35.6895, 139.6917)"
+  }
+}
+```
+### Objectives Event
+This log event will be captured when a player conducts actions within the tool of "Objectives". The description regarding specific variables under the variable of "specificEventDetail" can be found:
+
+- **action:** Describes the action the player is performing within the “objectives” menu. Possible values include: "select" and "unselect"
+- **missionSelect:** Specifies which mission the player has chosen to track. For example, “Foraged Forging: Collect 5 piles of scrap metal.”
+
+#### Example JSON format
+```json
+{
+  "itemID": "abc123-unique",
+  "installID": "device-001",
+  "buildType": "Production",
+  "buildVersion": "v2.0.1",
+  "playerName": "Alice",
+  "playerId": "player_001",
+  "groupType": "instructor-led",
+  "platform": "Windows",
+  "timestamp": "2025-02-20 14:30:00",
+  "timezone": "UTC+2",
+  "playerPosition": {
+    "X": 10.5,
+    "Y": 20.0,
+    "Z": 5.5
+  },
+  "cameraRotation": {
+    "X": 0.0,
+    "Y": 90.0,
+    "Z": 0.0
+  },
+  "performance": {
+    "memory": "8GB",
+    "frame/sec": 60,
+    "others": "N/A"
+  },
+  "replayNumber": 3,
+  "sceneNames": [
+    "Unit 1_space ship",
+    "Unit 2_alien dungeon"
+  ],
+  "regionName": "Sector 1",
+  "questTable": {
+    "activeQuests": [
+      "quest3"
+    ],
+    "completedQuests": [
+      "quest1",
+      "quest2"
+    ]
+  },
+  "taskTable": {
+    "activeTasks": [
+      "task3"
+    ],
+    "completedTasks": [
+      "task1",
+      "task2"
+    ]
+  },
+  "eventType": "objectivesEvent",
+  "specificEventDetail": {
+    "action": "select",
+    "missionSelect": "Foraged Forging: Collect 5 piles of scrap metal"
+  }
+}
+```
+### Objectives Event
+This log event will be captured when a player conducts actions within the tool of "Objectives". The description regarding specific variables under the variable of "specificEventDetail" can be found:
+
+- **argumentationTitle:** The title or topic of the argumentation. Example names include: "U1 – Argumentation tutorial," "U2 – Watershed," and "U3 – Pollution Upstream."
+- **argumentationDescription:** A brief description of the corresponding argumentation title. For example: "U1 – Argumentation tutorial - Place the claim, reasoning, and evidence orbs in orbit," "U2 – Watershed - Which watershed is bigger based on collected evidence from eastern and western waterfalls," and "U3 – Pollution Upstream" equals "Where is the pollution site probably located?"
+- **arctionType:** Specifies the action type for the argumentation event. It has two possible values: 1) **argumentationSessionOpen:** Indicates that the player has opened the scientific argumentation engine. 2) **argumentationSessionClose:** Indicates that the player has closed the scientific argumentation engine.
+
+#### Example JSON format
+```json
+{
+  "itemID": "abc123-unique",
+  "installID": "device-001",
+  "buildType": "Production",
+  "buildVersion": "v2.0.1",
+  "playerName": "Alice",
+  "playerId": "player_001",
+  "groupType": "instructor-led",
+  "platform": "Windows",
+  "timestamp": "2025-02-20 14:30:00",
+  "timezone": "UTC+2",
+  "playerPosition": {
+    "X": 10.5,
+    "Y": 20.0,
+    "Z": 5.5
+  },
+  "cameraRotation": {
+    "X": 0.0,
+    "Y": 90.0,
+    "Z": 0.0
+  },
+  "performance": {
+    "memory": "8GB",
+    "frame/sec": 60,
+    "others": "N/A"
+  },
+  "replayNumber": 3,
+  "sceneNames": [
+    "Unit 1_space ship",
+    "Unit 2_alien dungeon"
+  ],
+  "regionName": "Sector 1",
+  "questTable": {
+    "activeQuests": [
+      "quest3"
+    ],
+    "completedQuests": [
+      "quest1",
+      "quest2"
+    ]
+  },
+  "taskTable": {
+    "activeTasks": [
+      "task3"
+    ],
+    "completedTasks": [
+      "task1",
+      "task2"
+    ]
+  },
+  "eventType": "objectivesEvent",
+  "specificEventDetail": {
+    "action": "select",
+    "missionSelect": "Foraged Forging: Collect 5 piles of scrap metal"
+  }
+}
+```
