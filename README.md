@@ -1010,12 +1010,144 @@ This log event will be captured when a player conducts actions within the tool o
   }
 }
 ```
-### Objectives Event
-This log event will be captured when a player conducts actions within the tool of "Objectives". The description regarding specific variables under the variable of "specificEventDetail" can be found:
+### Argumentation Event
+This log event will be captured when a player opens or exists the argumentation system. The description regarding specific variables under the variable of "specificEventDetail" can be found:
 
 - **argumentationTitle:** The title or topic of the argumentation. Example names include: "U1 – Argumentation tutorial," "U2 – Watershed," and "U3 – Pollution Upstream."
 - **argumentationDescription:** A brief description of the corresponding argumentation title. For example: "U1 – Argumentation tutorial - Place the claim, reasoning, and evidence orbs in orbit," "U2 – Watershed - Which watershed is bigger based on collected evidence from eastern and western waterfalls," and "U3 – Pollution Upstream" equals "Where is the pollution site probably located?"
 - **arctionType:** Specifies the action type for the argumentation event. It has two possible values: 1) **argumentationSessionOpen:** Indicates that the player has opened the scientific argumentation engine. 2) **argumentationSessionClose:** Indicates that the player has closed the scientific argumentation engine.
+
+#### Example JSON format
+```json
+{
+  "itemID": "abc123-unique",
+  "installID": "device-001",
+  "buildType": "Production",
+  "buildVersion": "v2.0.1",
+  "playerName": "Alice",
+  "playerId": "player_001",
+  "groupType": "instructor-led",
+  "platform": "Windows",
+  "timestamp": "2025-02-20 14:30:00",
+  "timezone": "UTC+2",
+  "playerPosition": {
+    "X": 10.5,
+    "Y": 20.0,
+    "Z": 5.5
+  },
+  "cameraRotation": {
+    "X": 0.0,
+    "Y": 90.0,
+    "Z": 0.0
+  },
+  "performance": {
+    "memory": "8GB",
+    "frame/sec": 60,
+    "others": "N/A"
+  },
+  "replayNumber": 3,
+  "sceneNames": [
+    "Unit 2_alien dungeon"
+  ],
+  "regionName": "Sector 1",
+  "questTable": {
+    "activeQuests": [
+      "quest3"
+    ],
+    "completedQuests": [
+      "quest1",
+      "quest2"
+    ]
+  },
+  "taskTable": {
+    "activeTasks": [
+      "task3"
+    ],
+    "completedTasks": [
+      "task1",
+      "task2"
+    ]
+  },
+  "eventType": "argumentationEvent",
+  "specificEventDetail": {
+    "argumentationTitle": "U2 – Watershed",
+    "argumentationDescription": "Which watershed is bigger based on collected evidence from eastern and western waterfalls",
+    "arctionType": "argumentationSessionOpen"
+  }
+}
+```
+### Argumentation Node Event
+This log event will be captured when a player interacts with the features or functions within the argumentation system. The description regarding specific variables under the variable of "specificEventDetail" can be found:
+
+- **argumentationTitle:** The title or topic of the argumentation. Example names include: "U1 – Argumentation tutorial", "U2 – Watershed", "U3 – Pollution Upstream"
+- **nodeName:** The name of the choice node. Example names include: "A", "1" and "II."
+- **arctionType:** Specifies the action type for the argumentation node event. It has four possible values: 1) **argumentationNodeHoverStart:** Generated when the player hovers on a choice node and a dialogue box pops up for them to read. 2)**argumentationNodeHoverEnd:** Generated when the player ends hovering on a specific node. 3) **argumentationNodeAdd:** Generated when the player drags the choice node into the argumentation structure. 4)**argumentationNodeRemove:** Generated when the player removes the node from the argumentation structure.
+
+#### Example JSON format
+```json
+{
+  "itemID": "abc123-unique",
+  "installID": "device-001",
+  "buildType": "Production",
+  "buildVersion": "v2.0.1",
+  "playerName": "Alice",
+  "playerId": "player_001",
+  "groupType": "instructor-led",
+  "platform": "Windows",
+  "timestamp": "2025-02-20 14:30:00",
+  "timezone": "UTC+2",
+  "playerPosition": {
+    "X": 10.5,
+    "Y": 20.0,
+    "Z": 5.5
+  },
+  "cameraRotation": {
+    "X": 0.0,
+    "Y": 90.0,
+    "Z": 0.0
+  },
+  "performance": {
+    "memory": "8GB",
+    "frame/sec": 60,
+    "others": "N/A"
+  },
+  "replayNumber": 3,
+  "sceneNames": [
+    "Unit 2_alien dungeon"
+  ],
+  "regionName": "Sector 1",
+  "questTable": {
+    "activeQuests": [
+      "quest3"
+    ],
+    "completedQuests": [
+      "quest1",
+      "quest2"
+    ]
+  },
+  "taskTable": {
+    "activeTasks": [
+      "task3"
+    ],
+    "completedTasks": [
+      "task1",
+      "task2"
+    ]
+  },
+  "eventType": "argumentationNodeEvent",
+  "specificEventDetail": {
+    "argumentationTitle": "U1 – Argumentation tutorial",
+    "nodeName": "A",
+    "arctionType": "argumentationNodeHoverStart"
+  }
+}
+```
+### Argumentation Tool Event
+This log event will be captured when a player interacts with tools like "instruction" and "previous chat" within the argumentation system. The description regarding specific variables under the variable of "specificEventDetail" can be found:
+
+- **argumentationTitle:** The title or topic of the argumentation. Example names include: 1) "U1 – Argumentation tutorial," 2) "U2 – Watershed," and "U3 – Pollution Upstream."
+- **toolName:** The name of the tool that the player can refer to within the argumentation engine.
+- **arctionType:** Specifies the action type for the argumentation tool event. It has two possible values: 1) **argumentationToolOpen:** Indicates that the player has opened the argumentation tool within a certain argumentation session. 2) **argumentationToolClose:** Indicates that the player has closed the argumentation tool within a certain argumentation session.
 
 #### Example JSON format
 ```json
@@ -1069,10 +1201,194 @@ This log event will be captured when a player conducts actions within the tool o
       "task2"
     ]
   },
-  "eventType": "objectivesEvent",
+  "eventType": "argumentationToolEvent",
   "specificEventDetail": {
-    "action": "select",
-    "missionSelect": "Foraged Forging: Collect 5 piles of scrap metal"
+    "argumentationTitle": "U1 – Argumentation tutorial",
+    "toolName": "referenceTool",
+    "arctionType": "argumentationToolOpen"
   }
+}
+```
+### Mini Game Event
+This log event will be captured when a player starts or ends to play mini-games. The description regarding specific variables under the variable of "specificEventDetail" can be found:
+
+- **gameSession:** Specifies which mini-game session the log belongs to. Example sessions include: "Nanomanchine1," "Nanomanchine2," and "Forge Mini Game"
+- **action:** Indicates the state of the mini-game session. Possible values include: "start" (when the player starts the session) and "end" (when the player completes the session).
+
+#### Example JSON format
+```json
+{
+  "itemID": "abc123-unique",
+  "installID": "device-001",
+  "buildType": "Production",
+  "buildVersion": "v2.0.1",
+  "playerName": "Alice",
+  "playerId": "player_001",
+  "groupType": "instructor-led",
+  "platform": "Windows",
+  "timestamp": "2025-02-20 14:30:00",
+  "timezone": "UTC+2",
+  "playerPosition": {
+    "X": 10.5,
+    "Y": 20.0,
+    "Z": 5.5
+  },
+  "cameraRotation": {
+    "X": 0.0,
+    "Y": 90.0,
+    "Z": 0.0
+  },
+  "performance": {
+    "memory": "8GB",
+    "frame/sec": 60,
+    "others": "N/A"
+  },
+  "replayNumber": 3,
+  "sceneNames": [
+    "Unit 1_space ship",
+    "Unit 2_alien dungeon"
+  ],
+  "regionName": "Sector 1",
+  "questTable": {
+    "activeQuests": [
+      "quest3"
+    ],
+    "completedQuests": [
+      "quest1",
+      "quest2"
+    ]
+  },
+  "taskTable": {
+    "activeTasks": [
+      "task3"
+    ],
+    "completedTasks": [
+      "task1",
+      "task2"
+    ]
+  },
+  "eventType": "miniGameEvent",
+  "specificEventDetail": {
+    "gameSession": "Nanomanchine1",
+    "action": "start"
+  }
+}
+```
+### Mini Game Interaction Event
+This log event will be captured when a player starts or ends to play mini-games. The description regarding specific variables under the variable of "specificEventDetail" can be found:
+
+- **gameSession:** Specifies which mini-game session the log belongs to.
+- **action:** Indicates the action the player is performing. Example values include: "drag," "drop," and "remove."
+- **object:** Identifies which piece is interacted with by the player. Example pieces include: "horizontalLine1," "horizontalLine2," "leftDownCorner," and "rightDownCorner."
+- **statement:** Describes how the action on the object changes the object's state or outcome. Example values include: "cold", "warm", and "hot". If the interaction does not affect the object's statement, use "NA".
+
+#### Example JSON format
+```json
+{
+  "itemID": "abc123-unique",
+  "installID": "device-001",
+  "buildType": "Production",
+  "buildVersion": "v2.0.1",
+  "playerName": "Alice",
+  "playerId": "player_001",
+  "groupType": "instructor-led",
+  "platform": "Windows",
+  "timestamp": "2025-02-20 14:30:00",
+  "timezone": "UTC+2",
+  "playerPosition": {
+    "X": 10.5,
+    "Y": 20.0,
+    "Z": 5.5
+  },
+  "cameraRotation": {
+    "X": 0.0,
+    "Y": 90.0,
+    "Z": 0.0
+  },
+  "performance": {
+    "memory": "8GB",
+    "frame/sec": 60,
+    "others": "N/A"
+  },
+  "replayNumber": 3,
+  "sceneNames": [
+    "Unit 2_alien dungeon"
+  ],
+  "regionName": "Sector 1",
+  "questTable": {
+    "activeQuests": [
+      "quest3"
+    ],
+    "completedQuests": [
+      "quest1",
+      "quest2"
+    ]
+  },
+  "taskTable": {
+    "activeTasks": [
+      "task3"
+    ],
+    "completedTasks": [
+      "task1",
+      "task2"
+    ]
+  },
+  "eventType": "miniGameInteractionEvent",
+  "specificEventDetail": {
+    "gameSession": "Nanomanchine1",
+    "action": "drag",
+    "object": "horizontalLine1",
+    "statement": "cold"
+  }
+}
+```
+## Reference Information
+This type of information can be uploaded manually and saved in a local database instead of being collected by the logging system in real time.
+
+### Dialogue Event
+
+#### Example JSON format
+```json
+{
+      "dialogueID": "dlg-101",
+      "dialogueNames": "Introduction to AI",
+      "rawTextContent": "Welcome to the AI unit. Today, we will discuss what AI is and its applications."
+}
+```
+### Dialogue Node Event 
+
+#### Example JSON format
+```json
+ {
+      "dialogueID": "dlg-101",
+      "dialogueNodeID": "node-1",
+      "choiceID": ["A", "B", "C"],
+      "dialogueNodeName": "AI Definition",
+      "dialogueNodeText": "AI stands for Artificial Intelligence. What do you think it does?",
+      "choiceText": {
+        "A": "Mimics human intelligence",
+        "B": "Controls robots",
+        "C": "Is just a sci-fi concept"
+      }
+}
+```
+### Argumentation Node Events 
+
+#### Example JSON format
+```json
+ {
+      "argumentationTitle": "U2 – Watershed",
+      "nodeName": "A",
+      "nodeDescription": "Water that evaporates from the ocean will leave the salt behind. Thus the rain that falls on land will be drinkable."
+}
+```
+### Player General Information
+
+#### Example JSON format
+```json
+ {
+      "playerId": "player-001",
+      "teacherId": "teacher-123",
+      "classId": "class-789"
 }
 ```
