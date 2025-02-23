@@ -101,7 +101,7 @@ Each log record should contain the following variables:
 As we mentioned above, each specific event type contains different information, which is reflected in different particular variables within the variable of "specificEventDetail" in a nested structure.
 
 ### Game Start Event
-When a player starts to play MHS. No event type specific detailed information.
+When a player starts to play MHS. No event type-specific detailed information.
 
 #### Example JSON format
 ```JSON
@@ -154,7 +154,7 @@ When a player starts to play MHS. No event type specific detailed information.
 }
 ```
 ### Game End Event
-When a player ends up playing MHS. No event type specific detailed information.
+When a player ends up playing MHS. No event type-specific detailed information.
 
 #### Example JSON format
 ```JSON
@@ -193,12 +193,18 @@ When a player ends up playing MHS. No event type specific detailed information.
     "activeQuests": [
     ],
     "completedQuests": [
+    "quest1",
+    "quest2",
+    "quest3"
     ]
   },
   "taskTable": {
     "activeTasks": [
     ],
     "completedTasks": [
+    "task1",
+    "task2",
+    "task3"
     ]
   },
   "eventType": "gameEndEvent",
@@ -207,7 +213,7 @@ When a player ends up playing MHS. No event type specific detailed information.
 }
 ```
 ### Trigger Event (Object Interaction Event)
-When a player interacts with an in-game object, specific variables related to this event type are the following:
+When a player interacts with an in-game object, specific variables related to this event type and saved within the variable of "specificEventDetail" are the following:
 
 - **objectID:** A unique ID created for each object in a certain scene so that we can identify which object the player (student) interacts with.
 - **objectName:** A name of the object, such as “Cube1inU2Dungeon,” “ControlPanel1inU3Dungeon.”
@@ -275,7 +281,7 @@ When a player interacts with an in-game object, specific variables related to th
 }
 ```
 ### Quest Event
-When a player starts or finishes a part of a specific unit, such as the "Beam Me Up, DANI!" in unit 1, this event type can be generated:
+When a player starts or finishes a specific part of a unit, such as the "Beam Me Up, DANI!" in unit 1, this event type can be generated:
 
 - **questID:** A unique ID is assigned to each quest.
 - **questName:** The descriptive name given to a quest ID. Example names include:
@@ -483,7 +489,7 @@ This log event will be captured when a player triggers a dialogue box during the
 }
 ```
 ### Dialogue Node Event
-This log event will be captured when a player triggers a dialogue box during the gameplay. The description regarding specific variables under the variable of "specificEventDetail" can be found:
+This log event will be captured when a player needs to select a conversation within a dialogue session. The description regarding specific variables under the variable of "specificEventDetail" can be found:
 
 - **dialogueID:** A unique ID is assigned to each dialogue section.
 - **dialogueNodeID:** A unique ID assigned to the dialogue box, which contains the choice nodes, within the corresponding dialogue section.
@@ -684,71 +690,6 @@ This log event will be captured when a player opens the panel containing differe
 }
 ```
 ### DANI Feature Event
-This log event will be captured when a player opens the panel containing different tools within the game by using the "Tab" keyboard. The description regarding specific variables under the variable of "specificEventDetail" can be found:
-
-- **featureName:** The name of the tool. Example names include: 1)"map," 2)"background info," and 3)"chat log."
-- **actionName:** Specifies the action for this event type. It has two possible values: 1) **arfFeatureOpenEvent:** Occurs when the player presses the "Tab" keyboard button to open the in-game tool panel. 2) **arfFeatureCloseEvent:** Occurs when the player closes the in-game tool panel.
-
-#### Example JSON format
-```json
-{
-  "itemID": "abc123-unique",
-  "installID": "device-001",
-  "buildType": "Production",
-  "buildVersion": "v2.0.1",
-  "playerName": "Alice",
-  "playerId": "player_001",
-  "groupType": "instructor-led",
-  "platform": "Windows",
-  "timestamp": "2025-02-20 14:30:00",
-  "timezone": "UTC+2",
-  "playerPosition": {
-    "X": 10.5,
-    "Y": 20.0,
-    "Z": 5.5
-  },
-  "cameraRotation": {
-    "X": 0.0,
-    "Y": 90.0,
-    "Z": 0.0
-  },
-  "performance": {
-    "memory": "8GB",
-    "frame/sec": 60,
-    "others": "N/A"
-  },
-  "replayNumber": 3,
-  "sceneNames": [
-    "Unit 1_space ship",
-    "Unit 2_alien dungeon"
-  ],
-  "regionName": "Sector 1",
-  "questTable": {
-    "activeQuests": [
-      "quest3"
-    ],
-    "completedQuests": [
-      "quest1",
-      "quest2"
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-      "task3"
-    ],
-    "completedTasks": [
-      "task1",
-      "task2"
-    ]
-  },
-  "eventType": "DANIFeatureEvent",
-  "specificEventDetail": {
-    "featureName": "map",
-    "actionName": "arfFeatureOpenEvent"
-  }
-}
-```
-### DANI Feature Event
 This log event will be captured when a player chooses a specific tool within the tool panel. The description regarding specific variables under the variable of "specificEventDetail" can be found:
 
 - **featureName:** The name of the tool. Example names include: 1)"map," 2)"background info," and 3)"chat log."
@@ -809,7 +750,7 @@ This log event will be captured when a player chooses a specific tool within the
   "eventType": "DANIFeatureEvent",
   "specificEventDetail": {
     "featureName": "map",
-    "actionName": "arfFeatureOpenEvent"
+    "actionName": "DANIFeatureOpenEvent"
   }
 }
 ```
