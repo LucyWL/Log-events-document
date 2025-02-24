@@ -1150,6 +1150,77 @@ This log event will be captured when a player interacts with tools like "instruc
   }
 }
 ```
+### Argumentation Answer Event
+This log event will be captured when a player presses the "submit" button within the argumentation system. The description regarding specific variables under the variable of "specificEventDetail" can be found:
+
+- **argumentationTitle:** The title or topic of the argumentation. Example names include: "U1 – Argumentation tutorial", "U2 – Watershed", and "U3 – Pollution Upstream".
+- **answerSubmitted:** A combination of the three components – Claim, Reasoning, and Evidence. Examples include: "I, A, 2", "II, B, 1", and "I, C, 7". If only one or two components is selected, then: "I,," indicates only Claim is selected. ",A," indicates only Reasoning is selected. ",,1" indicates only Evidence is selected. ",A,1" indicates only evidence and reason are selected.  
+- **arctionType:** Specifies the action type for the argumentation answer event. It has two possible values:
+  - **argumentationSuccess:** Indicates the player hit the "Submit" button with the correct answer.
+  - **argumentationFailed:** Indicates the player submitted an incorrect answer.
+- **feedbackText:** Provides the feedback the player received upon submitting the answer. The feedback content depends on the answer provided.
+
+#### Example JSON format
+```json
+{
+  "itemID": "abc123-unique",
+  "installID": "device-001",
+  "buildType": "Production",
+  "buildVersion": "v2.0.1",
+  "playerName": "Alice",
+  "playerId": "player_001",
+  "groupType": "instructor-led",
+  "platform": "Windows",
+  "timestamp": "2025-02-20 14:30:00",
+  "timezone": "UTC+2",
+  "playerPosition": {
+    "X": 10.5,
+    "Y": 20.0,
+    "Z": 5.5
+  },
+  "cameraRotation": {
+    "X": 0.0,
+    "Y": 90.0,
+    "Z": 0.0
+  },
+  "performance": {
+    "memory": "8GB",
+    "frame/sec": 60,
+    "others": "N/A"
+  },
+  "replayNumber": 3,
+  "sceneNames": [
+    "Unit 1_space ship",
+    "Unit 2_alien dungeon"
+  ],
+  "regionName": "Sector 1",
+  "questTable": {
+    "activeQuests": [
+      "quest3"
+    ],
+    "completedQuests": [
+      "quest1",
+      "quest2"
+    ]
+  },
+  "taskTable": {
+    "activeTasks": [
+      "task3"
+    ],
+    "completedTasks": [
+      "task1",
+      "task2"
+    ]
+  },
+  "eventType": "argumentationAnswerEvent",
+  "specificEventDetail": {
+    "argumentationTitle": "U1 – Argumentation tutorial",
+    "answerSubmitted": "I, A, 2",
+    "arctionType": "argumentationSuccess",
+    "feedbackText": "Well done! Your answer is correct."
+  }
+}
+```
 ### Mini Game Event
 This log event will be captured when a player starts or ends to play mini-games. The description regarding specific variables under the variable of "specificEventDetail" can be found:
 
