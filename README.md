@@ -11,7 +11,7 @@ Each log record should contain the following variables:
 - **playerName:** The Name of the student (player) can be given by the teacher, who has a name map of the students’ fake and real names.
 - **playerId:** This is a unique ID for a student, in case the playerName has duplicate records.
 - **groupType:** Whether an instructor within a class setting leads the player or plays the game individually.
-Platform: ** The platform the student used to play the game (e.g., Windows, Mac, iPad).
+- **Platform:** The platform the student used to play the game (e.g., Windows, Mac, iPad).
 - **timestamp:** The time point when this log record is collected with a format of “yyyy-mm-dd hh:mm:ss”.
 - **timezone:** The Time zone (which should be meaningful) still needs more discussion (it restricts the geographic zones where the game will be played).
 - **playerPosition:**
