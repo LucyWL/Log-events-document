@@ -46,7 +46,6 @@ Each log record should contain the following variables:
   "buildVersion": "v1.2.3",
   "playerName": "John Doe",
   "playerId": "player-456",
-  "groupType": "individual",
   "platform": "Windows",
   "timestamp": "2025-02-20 12:34:56",
   "timezone": "UTC+0",
@@ -65,11 +64,10 @@ Each log record should contain the following variables:
     "frame/sec": 60,
     "cpuUsage": "20%"
   },
-  "replayNumber": 2,
   "sceneNames": [
-    "Unit 1_space ship",
+    "Unit 2_scene",
   ],
-  "regionName": "Sector 7G",
+  "regionName": "Spaceship_crashing_dungeon",
   "questTable": {
     "activeQuests": [
       "quest1",
@@ -77,15 +75,6 @@ Each log record should contain the following variables:
     ],
     "completedQuests": [
       "quest0"
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-      "task1",
-      "task2"
-    ],
-    "completedTasks": [
-      "task0"
     ]
   },
   "eventType": "gameStartEvent",
@@ -110,7 +99,6 @@ When a player starts to play MHS. No event type-specific detailed information.
   "buildVersion": "v1.2.3",
   "playerName": "John Doe",
   "playerId": "player-456",
-  "groupType": "individual",
   "platform": "Windows",
   "timestamp": "2025-02-20 12:34:56",
   "timezone": "UTC+0",
@@ -131,19 +119,13 @@ When a player starts to play MHS. No event type-specific detailed information.
   },
   "replayNumber": 2,
   "sceneNames": [
-    "Unit 1_space ship",
+    "Unit 2_scene",
   ],
-  "regionName": "Sector 7G",
+  "regionName": "Spaceship_crashing_dungeon",
   "questTable": {
     "activeQuests": [
     ],
     "completedQuests": [
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-    ],
-    "completedTasks": [
     ]
   },
   "eventType": "gameStartEvent",
@@ -184,9 +166,9 @@ When a player ends up playing MHS. No event type-specific detailed information.
   },
   "replayNumber": 2,
   "sceneNames": [
-    "Unit 1_space ship",
+    "Unit 1_scene",
   ],
-  "regionName": "Sector 7G",
+  "regionName": "Spaceship",
   "questTable": {
     "activeQuests": [
     ],
@@ -194,15 +176,6 @@ When a player ends up playing MHS. No event type-specific detailed information.
     "quest1",
     "quest2",
     "quest3"
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-    ],
-    "completedTasks": [
-    "task1",
-    "task2",
-    "task3"
     ]
   },
   "eventType": "gameEndEvent",
@@ -227,7 +200,6 @@ When a player interacts with an in-game object, specific variables related to th
   "buildVersion": "v2.0.1",
   "playerName": "Alice",
   "playerId": "player_001",
-  "groupType": "instructor-led",
   "platform": "Windows",
   "timestamp": "2025-02-20 14:30:00",
   "timezone": "UTC+2",
@@ -246,11 +218,10 @@ When a player interacts with an in-game object, specific variables related to th
     "frame/sec": 60,
     "others": "N/A"
   },
-  "replayNumber": 3,
   "sceneNames": [
-    "Unit 2_alien dungeon"
+    "Unit 2_scene",
   ],
-  "regionName": "Sector 1",
+  "regionName": "Spaceship_crashing_dungeon",
   "questTable": {
     "activeQuests": [
     "quest3"
@@ -258,15 +229,6 @@ When a player interacts with an in-game object, specific variables related to th
     "completedQuests": [
     "quest1",
     "quest2"
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-    "task3"
-    ],
-    "completedTasks": [
-    "task1",
-    "task2"
     ]
   },
   "eventType": "triggerEvent",
@@ -286,9 +248,8 @@ When a player starts or finishes a specific part of a unit, such as the "Beam Me
   - “U1 – Welcome to WAT247”
   - “U1 – An Amazing AI”
   - “U1 – Time to Argue”
-- **questEventType:** Specifies the event type for the quest. This variable has two possible values:
-  - **QuestActiveEvent:** Represents the log record when the student accepted a new quest.
-  - **QuestCompleteEvent:** Represents the log record when the student completes a quest.
+- **questEventType:** Specifies the event type for the quest. This variable has three possible values: 1) **questActiveEvent:** Represents the log record when the student accepted a new quest. 2) **questCompleteEvent:** Represents the log record when the student completes a quest. 3) **questProgressEvent:** Represents the log record for in-quest progress, such as when the player achieves a milestone (e.g., collecting evidence).
+- **progressContent:** Records the specific progress achieved within the quest, such as the details of the collected evidence.
 
 #### Example JSON format
 ```json
@@ -299,7 +260,6 @@ When a player starts or finishes a specific part of a unit, such as the "Beam Me
   "buildVersion": "v2.0.1",
   "playerName": "Alice",
   "playerId": "player_001",
-  "groupType": "instructor-led",
   "platform": "Windows",
   "timestamp": "2025-02-20 14:30:00",
   "timezone": "UTC+2",
@@ -318,12 +278,10 @@ When a player starts or finishes a specific part of a unit, such as the "Beam Me
     "frame/sec": 60,
     "others": "N/A"
   },
-  "replayNumber": 3,
   "sceneNames": [
-    "Unit 1_space ship",
-    "Unit 2_alien dungeon"
+    "Unit 2_scene"
   ],
-  "regionName": "Sector 1",
+  "regionName": "Spaceship-dungeon",
   "questTable": {
     "activeQuests": [
       "quest3"
@@ -333,26 +291,19 @@ When a player starts or finishes a specific part of a unit, such as the "Beam Me
       "quest2"
     ]
   },
-  "taskTable": {
-    "activeTasks": [
-      "task3"
-    ],
-    "completedTasks": [
-      "task1",
-      "task2"
-    ]
-  },
   "eventType": "questEvent",
   "specificEventDetail": {
-    "questID": "quest3",
-    "questName": "Beam Me Up, DANI!",
-    "questEventType": "QuestActiveEvent"
+    "questID": "quest2",
+    "questName": "topoTalk",
+    "questEventType": "questProgressEvent",
+    "progressContent": "Collected evidence near the waterfall"
   }
 }
 ```
-### Task Event
+<! -- ### Task Event
 When a player receives or completes a task within a part of a certain unit, such as the "U1 – Welcome to WAT247" in unit 1, this event type can be generated:
-
+-->
+<!--
 - **questID:** A unique ID assigned to each quest.
 - **taskID:** A unique ID given to each task.
 - **taskName:** The descriptive name given to a task. Example names include “wakeup”, “arfRoom”, “topoTalk.”
@@ -421,6 +372,7 @@ When a player receives or completes a task within a part of a certain unit, such
   }
 }
 ```
+-->
 ### Dialogue Event
 This log event will be captured when a player triggers a dialogue box during the gameplay. The description regarding specific variables under the variable of "specificEventDetail" can be found:
 
@@ -436,7 +388,6 @@ This log event will be captured when a player triggers a dialogue box during the
   "buildVersion": "v2.0.1",
   "playerName": "Alice",
   "playerId": "player_001",
-  "groupType": "instructor-led",
   "platform": "Windows",
   "timestamp": "2025-02-20 14:30:00",
   "timezone": "UTC+2",
@@ -455,12 +406,10 @@ This log event will be captured when a player triggers a dialogue box during the
     "frame/sec": 60,
     "others": "N/A"
   },
-  "replayNumber": 3,
   "sceneNames": [
-    "Unit 1_space ship",
-    "Unit 2_alien dungeon"
+    "Unit 2_scene"
   ],
-  "regionName": "Sector 1",
+  "regionName": "Spaceship dungeon",
   "questTable": {
     "activeQuests": [
       "quest3"
@@ -468,15 +417,6 @@ This log event will be captured when a player triggers a dialogue box during the
     "completedQuests": [
       "quest1",
       "quest2"
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-      "task3"
-    ],
-    "completedTasks": [
-      "task1",
-      "task2"
     ]
   },
   "eventType": "dialogueEvent",
@@ -503,7 +443,6 @@ This log event will be captured when a player needs to select a conversation wit
   "buildVersion": "v2.0.1",
   "playerName": "Alice",
   "playerId": "player_001",
-  "groupType": "instructor-led",
   "platform": "Windows",
   "timestamp": "2025-02-20 14:30:00",
   "timezone": "UTC+2",
@@ -522,12 +461,10 @@ This log event will be captured when a player needs to select a conversation wit
     "frame/sec": 60,
     "others": "N/A"
   },
-  "replayNumber": 3,
   "sceneNames": [
-    "Unit 1_space ship",
-    "Unit 2_alien dungeon"
+    "Unit 2_scene"
   ],
-  "regionName": "Sector 1",
+  "regionName": "Spaceship-dungeon",
   "questTable": {
     "activeQuests": [
       "quest3"
@@ -535,15 +472,6 @@ This log event will be captured when a player needs to select a conversation wit
     "completedQuests": [
       "quest1",
       "quest2"
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-      "task3"
-    ],
-    "completedTasks": [
-      "task1",
-      "task2"
     ]
   },
   "eventType": "dialogueNodeEvent",
@@ -573,7 +501,6 @@ This log event will be captured when a player navigates or moves around during t
   "buildVersion": "v2.0.1",
   "playerName": "Alice",
   "playerId": "player_001",
-  "groupType": "instructor-led",
   "platform": "Windows",
   "timestamp": "2025-02-20 14:30:00",
   "timezone": "UTC+2",
@@ -592,12 +519,10 @@ This log event will be captured when a player navigates or moves around during t
     "frame/sec": 60,
     "others": "N/A"
   },
-  "replayNumber": 3,
   "sceneNames": [
-    "Unit 1_space ship",
-    "Unit 2_alien dungeon"
+    "Unit 2_scene"
   ],
-  "regionName": "Sector 1",
+  "regionName": "Dungeon",
   "questTable": {
     "activeQuests": [
       "quest3"
@@ -605,15 +530,6 @@ This log event will be captured when a player navigates or moves around during t
     "completedQuests": [
       "quest1",
       "quest2"
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-      "task3"
-    ],
-    "completedTasks": [
-      "task1",
-      "task2"
     ]
   },
   "eventType": "movementEvent",
@@ -638,7 +554,6 @@ This log event will be captured when a player opens the panel containing differe
   "buildVersion": "v2.0.1",
   "playerName": "Alice",
   "playerId": "player_001",
-  "groupType": "instructor-led",
   "platform": "Windows",
   "timestamp": "2025-02-20 14:30:00",
   "timezone": "UTC+2",
@@ -657,10 +572,8 @@ This log event will be captured when a player opens the panel containing differe
     "frame/sec": 60,
     "others": "N/A"
   },
-  "replayNumber": 3,
   "sceneNames": [
-    "Unit 1_space ship",
-    "Unit 2_alien dungeon"
+    "Unit 2_Scene"
   ],
   "regionName": "Sector 1",
   "questTable": {
@@ -670,15 +583,6 @@ This log event will be captured when a player opens the panel containing differe
     "completedQuests": [
       "quest1",
       "quest2"
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-      "task3"
-    ],
-    "completedTasks": [
-      "task1",
-      "task2"
     ]
   },
   "eventType": "DANIMenuEvent",
@@ -702,7 +606,6 @@ This log event will be captured when a player chooses a specific tool within the
   "buildVersion": "v2.0.1",
   "playerName": "Alice",
   "playerId": "player_001",
-  "groupType": "instructor-led",
   "platform": "Windows",
   "timestamp": "2025-02-20 14:30:00",
   "timezone": "UTC+2",
@@ -721,12 +624,10 @@ This log event will be captured when a player chooses a specific tool within the
     "frame/sec": 60,
     "others": "N/A"
   },
-  "replayNumber": 3,
   "sceneNames": [
-    "Unit 1_space ship",
-    "Unit 2_alien dungeon"
+    "Unit 1_scene"
   ],
-  "regionName": "Sector 1",
+  "regionName": "Spaceship",
   "questTable": {
     "activeQuests": [
       "quest3"
@@ -734,15 +635,6 @@ This log event will be captured when a player chooses a specific tool within the
     "completedQuests": [
       "quest1",
       "quest2"
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-      "task3"
-    ],
-    "completedTasks": [
-      "task1",
-      "task2"
     ]
   },
   "eventType": "DANIFeatureEvent",
@@ -767,7 +659,6 @@ This log event will be captured when a player presses a key on the keyboard to a
   "buildVersion": "v2.0.1",
   "playerName": "Alice",
   "playerId": "player_001",
-  "groupType": "instructor-led",
   "platform": "Windows",
   "timestamp": "2025-02-20 14:30:00",
   "timezone": "UTC+2",
@@ -786,12 +677,10 @@ This log event will be captured when a player presses a key on the keyboard to a
     "frame/sec": 60,
     "others": "N/A"
   },
-  "replayNumber": 3,
   "sceneNames": [
-    "Unit 1_space ship",
-    "Unit 2_alien dungeon"
+    "Unit 1_scene"
   ],
-  "regionName": "Sector 1",
+  "regionName": "Spaceship",
   "questTable": {
     "activeQuests": [
       "quest3"
@@ -799,15 +688,6 @@ This log event will be captured when a player presses a key on the keyboard to a
     "completedQuests": [
       "quest1",
       "quest2"
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-      "task3"
-    ],
-    "completedTasks": [
-      "task1",
-      "task2"
     ]
   },
   "eventType": "hotkeyEvent",
@@ -833,7 +713,6 @@ This log event will be captured when a player conducts actions within the topogr
   "buildVersion": "v2.0.1",
   "playerName": "Alice",
   "playerId": "player_001",
-  "groupType": "instructor-led",
   "platform": "Windows",
   "timestamp": "2025-02-20 14:30:00",
   "timezone": "UTC+2",
@@ -852,12 +731,10 @@ This log event will be captured when a player conducts actions within the topogr
     "frame/sec": 60,
     "others": "N/A"
   },
-  "replayNumber": 3,
   "sceneNames": [
-    "Unit 1_space ship",
-    "Unit 2_alien dungeon"
+    "Unit 1_scene",
   ],
-  "regionName": "Sector 1",
+  "regionName": "Spaceship",
   "questTable": {
     "activeQuests": [
       "quest3"
@@ -865,15 +742,6 @@ This log event will be captured when a player conducts actions within the topogr
     "completedQuests": [
       "quest1",
       "quest2"
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-      "task3"
-    ],
-    "completedTasks": [
-      "task1",
-      "task2"
     ]
   },
   "eventType": "topographicMapEvent",
@@ -899,7 +767,6 @@ This log event will be captured when a player conducts actions within the tool o
   "buildVersion": "v2.0.1",
   "playerName": "Alice",
   "playerId": "player_001",
-  "groupType": "instructor-led",
   "platform": "Windows",
   "timestamp": "2025-02-20 14:30:00",
   "timezone": "UTC+2",
@@ -918,12 +785,10 @@ This log event will be captured when a player conducts actions within the tool o
     "frame/sec": 60,
     "others": "N/A"
   },
-  "replayNumber": 3,
   "sceneNames": [
-    "Unit 1_space ship",
-    "Unit 2_alien dungeon"
+    "Unit 1_scene"
   ],
-  "regionName": "Sector 1",
+  "regionName": "Spaceship",
   "questTable": {
     "activeQuests": [
       "quest3"
@@ -931,15 +796,6 @@ This log event will be captured when a player conducts actions within the tool o
     "completedQuests": [
       "quest1",
       "quest2"
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-      "task3"
-    ],
-    "completedTasks": [
-      "task1",
-      "task2"
     ]
   },
   "eventType": "objectivesEvent",
@@ -965,7 +821,6 @@ This log event will be captured when a player opens or exists the argumentation 
   "buildVersion": "v2.0.1",
   "playerName": "Alice",
   "playerId": "player_001",
-  "groupType": "instructor-led",
   "platform": "Windows",
   "timestamp": "2025-02-20 14:30:00",
   "timezone": "UTC+2",
@@ -984,11 +839,10 @@ This log event will be captured when a player opens or exists the argumentation 
     "frame/sec": 60,
     "others": "N/A"
   },
-  "replayNumber": 3,
   "sceneNames": [
-    "Unit 2_alien dungeon"
+    "Unit 2_scene"
   ],
-  "regionName": "Sector 1",
+  "regionName": "Alien dungeon",
   "questTable": {
     "activeQuests": [
       "quest3"
@@ -996,15 +850,6 @@ This log event will be captured when a player opens or exists the argumentation 
     "completedQuests": [
       "quest1",
       "quest2"
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-      "task3"
-    ],
-    "completedTasks": [
-      "task1",
-      "task2"
     ]
   },
   "eventType": "argumentationEvent",
@@ -1031,7 +876,6 @@ This log event will be captured when a player interacts with the features or fun
   "buildVersion": "v2.0.1",
   "playerName": "Alice",
   "playerId": "player_001",
-  "groupType": "instructor-led",
   "platform": "Windows",
   "timestamp": "2025-02-20 14:30:00",
   "timezone": "UTC+2",
@@ -1050,11 +894,10 @@ This log event will be captured when a player interacts with the features or fun
     "frame/sec": 60,
     "others": "N/A"
   },
-  "replayNumber": 3,
   "sceneNames": [
-    "Unit 2_alien dungeon"
+    "Unit 2_scene"
   ],
-  "regionName": "Sector 1",
+  "regionName": "Alien dungeon",
   "questTable": {
     "activeQuests": [
       "quest3"
@@ -1062,15 +905,6 @@ This log event will be captured when a player interacts with the features or fun
     "completedQuests": [
       "quest1",
       "quest2"
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-      "task3"
-    ],
-    "completedTasks": [
-      "task1",
-      "task2"
     ]
   },
   "eventType": "argumentationNodeEvent",
@@ -1097,7 +931,6 @@ This log event will be captured when a player interacts with tools like "instruc
   "buildVersion": "v2.0.1",
   "playerName": "Alice",
   "playerId": "player_001",
-  "groupType": "instructor-led",
   "platform": "Windows",
   "timestamp": "2025-02-20 14:30:00",
   "timezone": "UTC+2",
@@ -1116,12 +949,10 @@ This log event will be captured when a player interacts with tools like "instruc
     "frame/sec": 60,
     "others": "N/A"
   },
-  "replayNumber": 3,
   "sceneNames": [
-    "Unit 1_space ship",
-    "Unit 2_alien dungeon"
+    "Unit 1_scene"
   ],
-  "regionName": "Sector 1",
+  "regionName": "Spaceship",
   "questTable": {
     "activeQuests": [
       "quest3"
@@ -1129,15 +960,6 @@ This log event will be captured when a player interacts with tools like "instruc
     "completedQuests": [
       "quest1",
       "quest2"
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-      "task3"
-    ],
-    "completedTasks": [
-      "task1",
-      "task2"
     ]
   },
   "eventType": "argumentationToolEvent",
@@ -1167,7 +989,6 @@ This log event will be captured when a player presses the "submit" button within
   "buildVersion": "v2.0.1",
   "playerName": "Alice",
   "playerId": "player_001",
-  "groupType": "instructor-led",
   "platform": "Windows",
   "timestamp": "2025-02-20 14:30:00",
   "timezone": "UTC+2",
@@ -1186,12 +1007,10 @@ This log event will be captured when a player presses the "submit" button within
     "frame/sec": 60,
     "others": "N/A"
   },
-  "replayNumber": 3,
   "sceneNames": [
-    "Unit 1_space ship",
-    "Unit 2_alien dungeon"
+    "Unit 2_scene"
   ],
-  "regionName": "Sector 1",
+  "regionName": "Alien dungeon",
   "questTable": {
     "activeQuests": [
       "quest3"
@@ -1199,15 +1018,6 @@ This log event will be captured when a player presses the "submit" button within
     "completedQuests": [
       "quest1",
       "quest2"
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-      "task3"
-    ],
-    "completedTasks": [
-      "task1",
-      "task2"
     ]
   },
   "eventType": "argumentationAnswerEvent",
@@ -1234,7 +1044,6 @@ This log event will be captured when a player starts or ends to play mini-games.
   "buildVersion": "v2.0.1",
   "playerName": "Alice",
   "playerId": "player_001",
-  "groupType": "instructor-led",
   "platform": "Windows",
   "timestamp": "2025-02-20 14:30:00",
   "timezone": "UTC+2",
@@ -1253,12 +1062,10 @@ This log event will be captured when a player starts or ends to play mini-games.
     "frame/sec": 60,
     "others": "N/A"
   },
-  "replayNumber": 3,
   "sceneNames": [
-    "Unit 1_space ship",
-    "Unit 2_alien dungeon"
+    "Unit 1_scene"
   ],
-  "regionName": "Sector 1",
+  "regionName": "Spaceship",
   "questTable": {
     "activeQuests": [
       "quest3"
@@ -1266,15 +1073,6 @@ This log event will be captured when a player starts or ends to play mini-games.
     "completedQuests": [
       "quest1",
       "quest2"
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-      "task3"
-    ],
-    "completedTasks": [
-      "task1",
-      "task2"
     ]
   },
   "eventType": "miniGameEvent",
@@ -1301,7 +1099,6 @@ This log event will be captured when a player starts or ends to play mini-games.
   "buildVersion": "v2.0.1",
   "playerName": "Alice",
   "playerId": "player_001",
-  "groupType": "instructor-led",
   "platform": "Windows",
   "timestamp": "2025-02-20 14:30:00",
   "timezone": "UTC+2",
@@ -1320,11 +1117,10 @@ This log event will be captured when a player starts or ends to play mini-games.
     "frame/sec": 60,
     "others": "N/A"
   },
-  "replayNumber": 3,
   "sceneNames": [
-    "Unit 2_alien dungeon"
+    "Unit 2_scene"
   ],
-  "regionName": "Sector 1",
+  "regionName": "Alien dungeon",
   "questTable": {
     "activeQuests": [
       "quest3"
@@ -1332,15 +1128,6 @@ This log event will be captured when a player starts or ends to play mini-games.
     "completedQuests": [
       "quest1",
       "quest2"
-    ]
-  },
-  "taskTable": {
-    "activeTasks": [
-      "task3"
-    ],
-    "completedTasks": [
-      "task1",
-      "task2"
     ]
   },
   "eventType": "miniGameInteractionEvent",
@@ -1394,8 +1181,8 @@ This type of information can be uploaded manually and saved in a local database 
 ```
 ### Player General Information
 
-- **groupType:** Whether an instructor within a class setting leads the player or plays the game individually (move that to the reference database).
-- 
+<!-- - **groupType:** Whether an instructor within a class setting leads the player or plays the game individually (move that to the reference database).
+-->
 #### Example JSON format
 ```json
  {
