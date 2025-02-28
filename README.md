@@ -10,11 +10,10 @@ Each log record should contain the following variables:
 - **buildVersion:** Each released game version is assigned a unique ID, which we can use to select which version to analyze.
 - **playerName:** The Name of the student (player) can be given by the teacher, who has a name map of the students’ fake and real names.
 - **playerId:** This is a unique ID for a student, in case the playerName has duplicate records.
-- **groupType:** Whether an instructor within a class setting leads the player or plays the game individually.
 - **Platform:** The platform the student used to play the game (e.g., Windows, Mac, iPad).
 - **timestamp:** The time point when this log record is collected with a format of “yyyy-mm-dd hh:mm:ss”.
-- **timezone:** The Time zone (which should be meaningful) still needs more discussion (it restricts the geographic zones where the game will be played).
-- **playerPosition:**
+- **(optional)timezone:** The Time zone (which should be meaningful) still needs more discussion (it restricts the geographic zones where the game will be played) (UTC).
+- **playerPosition:** (global)
   - X
   - Y
   - Z
@@ -25,16 +24,15 @@ Each log record should contain the following variables:
 - **performance:**
   - memory
   - frame/sec
-  - others (to be continued)
-- **replayNumber:** The number of times the student has replayed corresponding game parts.
-- **sceneNames:** Which scene the student (player) is in (each unit has several scenes). Example name format: “Unit 1_space ship”, “Unit 2_ailien dungeon”, “Unit 2_topotraphy.”
-- **regionName:** The region name within a certain scene name.
+  - other metrics (to be continued)
+- **sceneNames:** Which scene the student (player) is in (each unit has several scenes). Example name format: “Unit 1_scene”, “Unit 2_scene.”
+- **regionName:** The region name (may need to be defined by the team) within a certain scene name.
 - **questTable:** An object representing the student's quest menu. It contains:
   - **activeQuests:** An array of quests that are currently active.
   - **completedQuests:** An array of quests that have been completed.
-- **taskTable:** An object representing the student's task menu. It contains:
+<!-- - **(may not applicable to this game version)taskTable:** An object representing the student's task menu. It contains:
   - **activeTasks:** An array of tasks that are currently active.
-  - **completedTasks:** An array of tasks that have been completed.
+  - **completedTasks:** An array of tasks that have been completed.-->
 - **eventType:** Which event type this record belongs to. Example events include: gameStartEvent, gameQuitEvent, triggerEvent, questEvent, taskEvent, dialogueEvent, dialogueNodeEvent, movementEvent, DANIMenuEvent, hotkeyEvent, DANIFeatureEvent, argumentationEvent, argumentationNodeEvent, argumentationAnswerEvent, argumentationToolEvent, miniGameEvent, miniGame InteractionEvent, topographicMapEvent, objectivesEvent.
 - **specificEventDetail:** This variable is structured as a nested JSON format and contains multiple variables belonging to a specific event type. Not all event types have value for this variable.
 
@@ -1396,11 +1394,13 @@ This type of information can be uploaded manually and saved in a local database 
 ```
 ### Player General Information
 
+- **groupType:** Whether an instructor within a class setting leads the player or plays the game individually (move that to the reference database).
+- 
 #### Example JSON format
 ```json
  {
       "playerId": "player-001",
       "teacherId": "teacher-123",
-      "classId": "class-789"
+      "classId": "class-789",
 }
 ```
