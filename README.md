@@ -33,7 +33,7 @@ Each log record should contain the following variables:
 <!-- - **(may not applicable to this game version)taskTable:** An object representing the student's task menu. It contains:
   - **activeTasks:** An array of tasks that are currently active.
   - **completedTasks:** An array of tasks that have been completed.-->
-- **eventType:** Which event type this record belongs to. Example events include: gameStartEvent, gameQuitEvent, triggerEvent, questEvent, taskEvent, dialogueEvent, dialogueNodeEvent, movementEvent, DANIMenuEvent, hotkeyEvent, DANIFeatureEvent, argumentationEvent, argumentationNodeEvent, argumentationAnswerEvent, argumentationToolEvent, miniGameEvent, miniGame InteractionEvent, topographicMapEvent, objectivesEvent.
+- **eventType:** Which event type this record belongs to. Example events include: gameStartEvent, gameQuitEvent, triggerEvent, questEvent, dialogueEvent, dialogueNodeEvent, movementEvent, DANIMenuEvent, hotkeyEvent, DANIFeatureEvent, argumentationEvent, argumentationNodeEvent, argumentationAnswerEvent, argumentationToolEvent, miniGameEvent, miniGame InteractionEvent, topographicMapEvent, objectivesEvent.
 - **specificEventDetail:** This variable is structured as a nested JSON format and contains multiple variables belonging to a specific event type. Not all event types have value for this variable.
 
 ### Example JSON format
