@@ -701,7 +701,7 @@ This log event will be captured when a player presses a key on the keyboard to a
 This log event will be captured when a player conducts actions within the topographic map. The description regarding specific variables under the variable of "specificEventDetail" can be found:
 
 - **featureUsed:** Indicates which feature on the map is used, such as the topographic level button or a waypoint.
-- **actionType:** Describes the specific action conducted by the player. Example values include: "Drag," "Drop," "Select," and "Unselect."
+- **actionType:** Describes the specific action conducted by the player. Example values include: "Drag," "Drop," "Select," and "Unselect." It can also be "dragStart" and "dragEnd".
 - **locationInfo:** Provides details about where the player moved the waypoint on the topographic map.
 
 #### Example JSON format
@@ -747,7 +747,7 @@ This log event will be captured when a player conducts actions within the topogr
   "eventType": "topographicMapEvent",
   "specificEventDetail": {
     "featureUsed": "waypoint",
-    "actionType": "Drag",
+    "actionType": "dragEnd",
     "locationInfo": "(35.6895, 139.6917)"
   }
 }
