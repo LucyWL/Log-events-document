@@ -1,6 +1,33 @@
 # MHS2.0 Log Events Illustration Document
 This repository is to create a structured illustration of MHS2.0's log events.
 
+# Table of Contents
+- [General Information](#General Information)
+- [Specific Event Information](#specific-event-information)
+  - [Game Start Event](#game-start-event)
+  - [Game End Event](#game-end-event)
+  - [Trigger Event (Object Interaction Event)](#trigger-event-object-interaction-event)
+  - [Quest Event](#quest-event)
+  - [Dialogue Event](#dialogue-event)
+  - [Dialogue Node Event](#dialogue-node-event)
+  - [Movement Event](#movement-event)
+  - [DANI Menu Event](#dani-menu-event)
+  - [DANI Feature Event](#dani-feature-event)
+  - [Hotkey Event](#hotkey-event)
+  - [Topographic Map Event](#topographic-map-event)
+  - [Objectives Event](#objectives-event)
+  - [Argumentation Event](#argumentation-event)
+  - [Argumentation Node Event](#argumentation-node-event)
+  - [Argumentation Tool Event](#argumentation-tool-event)
+  - [Argumentation Answer Event](#argumentation-answer-event)
+  - [Mini Game Event](#mini-game-event)
+  - [Mini Game Interaction Event](#mini-game-interaction-event)
+- [Reference Information](#reference-information)
+  - [Dialogue Event Reference](#dialogue-event-1)
+  - [Dialogue Node Event Reference](#dialogue-node-event-1)
+  - [Argumentation Node Events Reference](#argumentation-node-events)
+  - [Player General Information](#player-general-information)
+
 ## General Information
 Each log record should contain the following variables:
 
