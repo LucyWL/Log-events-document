@@ -2,7 +2,7 @@
 This repository is to create a structured illustration of MHS2.0's log events.
 
 # Table of Contents
-- [General Information](#General Information)
+- [General Information](#general-information)
 - [Specific Event Information](#specific-event-information)
   - [Game Start Event](#game-start-event)
   - [Game End Event](#game-end-event)
