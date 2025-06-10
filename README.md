@@ -942,7 +942,7 @@ This log event will be captured when a player interacts with the features or fun
   }
 }
 ```
-### Argumentation Tool Event
+### Argumentation Tool Event (Backing Info)
 This log event will be captured when a player interacts with tools like "instruction" and "previous chat" within the argumentation system. The description regarding specific variables under the variable of "specificEventDetail" can be found:
 
 - **argumentationTitle:** The title or topic of the argumentation. Example names include: 1) "U1 – Argumentation tutorial," 2) "U2 – Watershed," and "U3 – Pollution Upstream."
