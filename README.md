@@ -18,7 +18,7 @@ This repository is to create a structured illustration of MHS2.0's log events.
   - [Objectives Event](#objectives-event)
   - [Argumentation Event](#argumentation-event)
   - [Argumentation Node Event](#argumentation-node-event)
-  - [Argumentation Tool Event](#argumentation-tool-event)
+  - [Argumentation Tool Event](#argumentation-tool-event(backing-info))
   - [Argumentation Answer Event](#argumentation-answer-event)
   - [Mini Game Event](#mini-game-event)
   - [Mini Game Interaction Event](#mini-game-interaction-event)
