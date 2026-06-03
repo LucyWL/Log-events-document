@@ -255,7 +255,7 @@ And
 ```
 
 ## Game Start and End Event
-This event will happen every time when the player start or exit the game. The value of the eventType could be "gameStartEvent" and "gameEndEvent". I don't think this envent type needs specific variables. Example JSON record could be:
+This event will happen every time when the player start or exit the game. The value of the eventType could be "gameStartEvent" and "gameEndEvent". "gameStartEvent" is easy to capture, while the "gameEndEvent" should ask Dale's help. I don't think this envent type needs specific variables. Example JSON record could be:
 
  ```
 {
