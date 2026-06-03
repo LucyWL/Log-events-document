@@ -1,7 +1,7 @@
 # Potential New Logs
 
 ## DANI Panel Event
-This event will happen every time when the player hit the "Tab" keyboard or other possible ways (hotkeys) to open the tool panel. Also, it will capture which specific tools they selected witin the panel. The value of the eventType could be "DANIEvent". Specific variables under this event type could be "actionType" and "toolName". The values under the "actionType" could be "open", and "close". The values under the "toolName" could be "DaniPanel", "Map", "Arguments" and "Objectives". Example JSON record could be:
+This event will happen every time when the player hit the "Tab" keyboard or other possible ways (mouse-clicking) to open the tool panel. Also, it will capture which specific tools they selected witin the panel. The value of the eventType could be "DANIEvent". Specific variables under this event type could be "actionType" and "toolName". The values under the "actionType" could be "open", and "close". The values under the "toolName" could be "DaniPanel", "Map", "Arguments" and "Objectives". Example JSON record could be:
 ```
 {
     "_id": "69b4824e98a42e37064a7561",
