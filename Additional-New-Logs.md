@@ -391,3 +391,72 @@ And
     "version": "20260313-10763"
   }
 ```
+## Soil Key Puzzle Event
+This event will happen every time when the player interact with the soil key puzzle. Currently, we have collected logs regarding this puzzle with limited actions, "Started" and "Finished" the puzzle. We can extend the action types to "LeftDrag" and "RightDrag". Example game logs could be:
+```
+{
+    "_id": "69b4824e98a42e37064a7561",
+    "data": {
+      "actionType": "LeftDrag"
+    },
+    "device": {
+      "dpi": 96,
+      "gMemory": 512,
+      "gdApiType": "OpenGLES3",
+      "gdName": "ANGLE (Intel, Vulkan 1.3.289 (Intel(R) UHD Graphics (JSL) (0x00004E55)), Intel open-source Mesa driver)",
+      "memory": 182,
+      "os": "Windows 11",
+      "platform": "UnityWebGL",
+      "processors": 1,
+      "resolution": {
+        "height": 1440,
+        "refreshRate": {
+          "denominator": 1,
+          "numerator": 60,
+          "value": 60
+        },
+        "width": 3440
+      }
+    },
+    "eventType": "Soil Key Puzzle",
+    "game": "mhs",
+    "playerId": "wenyi222",
+    "sceneName": "Unit 3 Dev",
+    "serverTimestamp": "2026-03-13T21:31:58.497Z",
+    "version": "20260313-10763"
+  }
+```
+And
+```
+{
+    "_id": "69b4824e98a42e37064a7561",
+    "data": {
+      "actionType": "RightDrag"
+    },
+    "device": {
+      "dpi": 96,
+      "gMemory": 512,
+      "gdApiType": "OpenGLES3",
+      "gdName": "ANGLE (Intel, Vulkan 1.3.289 (Intel(R) UHD Graphics (JSL) (0x00004E55)), Intel open-source Mesa driver)",
+      "memory": 182,
+      "os": "Windows 11",
+      "platform": "UnityWebGL",
+      "processors": 1,
+      "resolution": {
+        "height": 1440,
+        "refreshRate": {
+          "denominator": 1,
+          "numerator": 60,
+          "value": 60
+        },
+        "width": 3440
+      }
+    },
+    "eventType": "Soil Key Puzzle",
+    "game": "mhs",
+    "playerId": "wenyi222",
+    "sceneName": "Unit 3 Dev",
+    "serverTimestamp": "2026-03-13T21:31:58.497Z",
+    "version": "20260313-10763"
+  }
+```
