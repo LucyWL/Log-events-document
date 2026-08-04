@@ -725,13 +725,46 @@ This log event will be captured when a player presses a key on the keyboard to a
 }
 ```
 ### Topographic Map Event
-This log event will be captured when a player conducts actions within the topographic map. The description regarding specific variables under the variable of "specificEventDetail" can be found:
 
-- **featureUsed:** Indicates which feature on the map is used, such as the topographic level button or a waypoint.
-- **actionType:** Describes the specific action conducted by the player. Example values include: "Drag," "Drop," "Select," and "Unselect." It can also be "dragStart" and "dragEnd".
-- **locationInfo:** Provides details about where the player moved the waypoint on the topographic map.
+The `TopographicMapEvent` should be captured whenever a player interacts with the topographic map or its waypoint feature.
 
-#### Example JSON format
+In the current game design, the map contains only one waypoint. The player does not drag the waypoint. Instead:
+
+1. The player clicks a location on the map to place the waypoint.
+2. If a waypoint already exists, clicking another location moves it to the newly selected position.
+3. The player can click the **Reset** button to remove the waypoint.
+4. The player can open and close the topographic map.
+
+Because the interaction is click-based rather than drag-based, the previous action values such as `Drag`, `Drop`, `dragStart`, and `dragEnd` should no longer be used for waypoint interactions.
+
+#### Variables within `specificEventDetail` or `data`
+
+- **featureUsed:** Identifies the map feature involved in the event.
+
+  Recommended values:
+
+  - `Map`
+  - `Waypoint`
+
+- **actionType:** Describes the specific map or waypoint action performed by the player.
+
+  Recommended values:
+
+  - `MapOpenEvent`: The player opened the topographic map.
+  - `MapCloseEvent`: The player closed the topographic map.
+  - `WaypointSetEvent`: The player clicked the map to place a waypoint when no waypoint previously existed.
+  - `WaypointMoveEvent`: The player clicked a different map location while a waypoint already existed, causing the waypoint to move.
+  - `WaypointResetEvent`: The player clicked the Reset button and removed the existing waypoint.
+
+- **mapPosition:** Records the newly selected waypoint position on the topographic map.
+
+  This field should be included for:
+
+  - `WaypointSetEvent`
+  - `WaypointMoveEvent`
+
+#### Example 1: Opening the map
+
 ```json
 {
   "itemID": "abc123-unique",
@@ -759,7 +792,7 @@ This log event will be captured when a player conducts actions within the topogr
     "others": "N/A"
   },
   "sceneNames": [
-    "Unit 1_scene",
+    "Unit 2 Prod (Refactor)"
   ],
   "regionName": "Spaceship",
   "questTable": {
@@ -771,14 +804,78 @@ This log event will be captured when a player conducts actions within the topogr
       "quest2"
     ]
   },
-  "eventType": "topographicMapEvent",
+  "eventType": "TopographicMapEvent",
   "specificEventDetail": {
-    "featureUsed": "waypoint",
-    "actionType": "dragEnd",
-    "locationInfo": "(35.6895, 139.6917)"
+    "featureUsed": "Map",
+    "actionType": "MapOpenEvent"
   }
 }
 ```
+#### Example 2: Placing the waypoint
+From this example, only the information (subvariables) that should be contained within the "data" ("specificEventDetail") variable will be shown. This event should be captured when the player clicks the map while no waypoint currently exists.
+
+```json
+{
+  "eventType": "TopographicMapEvent",
+  "specificEventDetail": {
+    "featureUsed": "Waypoint",
+    "actionType": "WaypointSetEvent",
+    "mapPosition": {
+      "x": -108.963608,
+      "y": 83.18783,
+      "z": 0
+    }
+  }
+}
+```
+#### Example 3: Moving the waypoint
+
+This event should be captured when a waypoint already exists and the player clicks another location on the map.
+
+```json
+{
+  "eventType": "TopographicMapEvent",
+  "specificEventDetail": {
+    "featureUsed": "Waypoint",
+    "actionType": "WaypointMoveEvent",
+    "mapPosition": {
+      "x": -164.424545,
+      "y": 75.42329,
+      "z": 0
+    }
+  }
+}
+```
+#### Example 4: Resetting the waypoint
+
+This event should be captured when the player clicks the Reset button and removes the current waypoint.
+
+```json
+{
+  "eventType": "TopographicMapEvent",
+  "specificEventDetail": {
+    "featureUsed": "Waypoint",
+    "actionType": "WaypointResetEvent",
+    "previousMapPosition": {
+      "x": -164.424545,
+      "y": 75.42329,
+      "z": 0
+    }
+  }
+}
+```
+#### Example 5: Closing the map
+
+```json
+{
+  "eventType": "TopographicMapEvent",
+  "specificEventDetail": {
+    "featureUsed": "Map",
+    "actionType": "MapCloseEvent"
+  }
+}
+```
+
 ### Objectives Event
 This log event will be captured when a player conducts actions within the tool of "Objectives". The description regarding specific variables under the variable of "specificEventDetail" can be found:
 
