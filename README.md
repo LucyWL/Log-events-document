@@ -812,7 +812,7 @@ Because the interaction is click-based rather than drag-based, the previous acti
 }
 ```
 #### Example 2: Placing the waypoint
-From this example, only the information (subvariables) that should be contained within the "data" ("specificEventDetail") variable will be shown. This event should be captured when the player clicks the map while no waypoint currently exists.
+From this example and beyond, only the information (subvariables) that should be contained within the "data" ("specificEventDetail") variable will be shown. This event should be captured when the player clicks the map while no waypoint currently exists.
 
 ```json
 {
