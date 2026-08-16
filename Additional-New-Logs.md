@@ -685,8 +685,7 @@ The event should record the complete design configuration that the player submit
   "data": {
     "featureUsed": "RoofStyle | ExtraCovering | GlassRoofTemperature",
     "actionType": "OptionSelected",
-    "selectedOption": "...",
-    "previousSelection": "..."
+    "selectedOption": "..."
   }
 }
 ```
