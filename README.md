@@ -734,6 +734,7 @@ In the current game design, the map contains only one waypoint. The player does 
 2. If a waypoint already exists, clicking another location moves it to the newly selected position.
 3. The player can click the **Reset** button to remove the waypoint.
 4. The player can open and close the topographic map.
+5. The player can select or unselect different content under the Legend section to control which map information or regions are displayed. Examples of legend content include `ToppoRoom`, `90Feet`, and `Water`.
 
 Because the interaction is click-based rather than drag-based, the previous action values such as `Drag`, `Drop`, `dragStart`, and `dragEnd` should no longer be used for waypoint interactions.
 
@@ -745,8 +746,9 @@ Because the interaction is click-based rather than drag-based, the previous acti
 
   - `Map`
   - `Waypoint`
+  - `Legend`
 
-- **actionType:** Describes the specific map or waypoint action performed by the player.
+- **actionType:** Describes the specific map, waypoint, or legend action performed by the player.
 
   Recommended values:
 
@@ -755,6 +757,8 @@ Because the interaction is click-based rather than drag-based, the previous acti
   - `WaypointSetEvent`: The player clicked the map to place a waypoint when no waypoint previously existed.
   - `WaypointMoveEvent`: The player clicked a different map location while a waypoint already existed, causing the waypoint to move.
   - `WaypointResetEvent`: The player clicked the Reset button and removed the existing waypoint.
+  - `Selected`: The player selected an item under the Legend section so that the corresponding map content is displayed.
+  - `Unselected`: The player unselected an item under the Legend section so that the corresponding map content is no longer displayed.
 
 - **mapPosition:** Records the newly selected waypoint position on the topographic map.
 
@@ -762,6 +766,19 @@ Because the interaction is click-based rather than drag-based, the previous acti
 
   - `WaypointSetEvent`
   - `WaypointMoveEvent`
+
+- **legendName:** Records the name of the specific content under the Legend section that the player selected or unselected.
+
+  This field should be included for:
+
+  - `featureUsed` is `Legend`
+  - `actionType` is `Selected` or `Unselected`
+
+  Example values may include:
+
+  - `ToppoRoom`
+  - `90Feet`
+  - `Water`
 
 #### Example 1: Opening the map
 
@@ -872,6 +889,47 @@ This event should be captured when the player clicks the Reset button and remove
   "specificEventDetail": {
     "featureUsed": "Map",
     "actionType": "MapCloseEvent"
+  }
+}
+```
+#### Example 6: Selecting content under the Legend section
+This event should be captured each time the player selects an item under the **Legend** section to display the corresponding content on the topographic map.
+
+For example, if the player selects `ToppoRoom`:
+
+```json
+{
+  "eventType": "TopographicMapEvent",
+  "specificEventDetail": {
+    "featureUsed": "Legend",
+    "actionType": "Selected",
+    "legendName": "ToppoRoom"
+  }
+}
+```
+Another example, if the player selects `Water`:
+
+```json
+{
+  "eventType": "TopographicMapEvent",
+  "specificEventDetail": {
+    "featureUsed": "Legend",
+    "actionType": "Selected",
+    "legendName": "Water"
+  }
+}
+```
+#### Example 7: Unselecting content under the Legend section
+This event should be captured each time the player unselects an item under the **Legend** section so that the corresponding content is no longer displayed on the topographic map.
+
+For example, if the player unselects `90Feet`:
+```json
+{
+  "eventType": "TopographicMapEvent",
+  "specificEventDetail": {
+    "featureUsed": "Legend",
+    "actionType": "Unselected",
+    "legendName": "90Feet"
   }
 }
 ```
