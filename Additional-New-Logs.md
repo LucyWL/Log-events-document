@@ -486,3 +486,227 @@ And
 ```
 
 This design would support more meaningful analyses than recording `"LeftDrag"` or `"RightDrag"` alone. For example, the logs could show how many adjustments a player made, whether the player moved toward or away from the correct setting, and how often the player passed over the correct spectrum position before solving the puzzle.
+
+## Solar Still Design Event
+
+The `SolarStillDesignEvent` should be captured whenever a player interacts with the **Solar Still Design** puzzle.
+
+In this puzzle, the player designs a structure for generating water by making one selection within each of three design elements:
+
+1. **Roof Style** — contains three possible choices.
+2. **Extra Covering** — contains two possible choices.
+3. **Glass Roof Temperature** — contains two possible choices.
+
+Only **one choice can be selected at a time within each design element**. If the player selects another choice within the same design element, the new selection replaces the previous selection. After making selections, the player can click the **Submit** button to submit the current Solar Still design.
+
+The event logs should therefore capture:
+
+1. Which design element the player interacted with.
+2. Which option the player selected.
+3. The complete set of design selections when the player clicks **Submit**.
+
+### Variables within `data`
+
+- **featureUsed:** Identifies which part of the Solar Still Design puzzle the player interacted with.
+
+  Recommended values:
+
+  - `RoofStyle`
+  - `ExtraCovering`
+  - `GlassRoofTemperature`
+  - `Submit`
+
+- **actionType:** Describes the specific action performed by the player.
+
+  Recommended values:
+
+  - `OptionSelected`: The player selected an option within one of the design elements.
+  - `DesignSubmitted`: The player clicked the Submit button to submit the current Solar Still design.
+
+- **selectedOption:** Records the option selected by the player.
+
+  This field should be included when:
+
+  - `actionType` is `OptionSelected`.
+
+  The exact values should use the canonical option names defined within the game.
+
+  For example:
+
+  ```text
+  RoofStyleOption1
+  RoofStyleOption2
+  RoofStyleOption3
+  ```
+
+  ```text
+  ExtraCoveringOption1
+  ExtraCoveringOption2
+  ```
+
+  ```text
+  GlassRoofTemperatureOption1
+  GlassRoofTemperatureOption2
+  ```
+
+  These names are placeholders and should be replaced with the actual option names used internally by the game if such names already exist.
+
+- **designSelections:** Records the player's complete Solar Still design at the time the player clicks the Submit button.
+
+  This field should be included when:
+
+  - `actionType` is `DesignSubmitted`.
+
+  It should contain the currently selected value for:
+
+  * `roofStyle`
+  * `extraCovering`
+  * `glassRoofTemperature`
+
+---
+
+### Example 1: Selecting a Roof Style
+
+This event should be captured when the player selects one of the three choices under **Roof Style**.
+
+```json
+{
+  "eventType": "SolarStillDesignEvent",
+  "data": {
+    "featureUsed": "RoofStyle",
+    "actionType": "OptionSelected",
+    "selectedOption": "RoofStyleOption1"
+  }
+}
+```
+### Example 2: Changing the Roof Style
+
+If the player previously selected one roof style and then selects a different roof style, another event should be generated.
+
+Because only one roof style can be active at a time, the new selection replaces the previous selection.
+
+```json
+{
+  "eventType": "SolarStillDesignEvent",
+  "data": {
+    "featureUsed": "RoofStyle",
+    "actionType": "OptionSelected",
+    "selectedOption": "RoofStyleOption3"
+  }
+}
+```
+
+This allows the gameplay log to preserve not only the player's final choice, but also changes made while reasoning through the puzzle.
+
+### Example 3: Selecting Extra Covering
+
+This event should be captured when the player selects one of the two choices under **Extra Covering**.
+
+```json
+{
+  "eventType": "SolarStillDesignEvent",
+  "data": {
+    "featureUsed": "ExtraCovering",
+    "actionType": "OptionSelected",
+    "selectedOption": "ExtraCoveringOption1"
+  }
+}
+```
+
+If the player later changes the selection:
+
+```json
+{
+  "eventType": "SolarStillDesignEvent",
+  "data": {
+    "featureUsed": "ExtraCovering",
+    "actionType": "OptionSelected",
+    "selectedOption": "ExtraCoveringOption2"
+  }
+}
+```
+
+### Example 4: Selecting the Glass Roof Temperature
+
+This event should be captured when the player selects one of the two choices under **Glass Roof Temperature**.
+
+```json
+{
+  "eventType": "SolarStillDesignEvent",
+  "data": {
+    "featureUsed": "GlassRoofTemperature",
+    "actionType": "OptionSelected",
+    "selectedOption": "GlassRoofTemperatureOption1"
+  }
+}
+```
+
+If the player changes the selected temperature:
+
+```json
+{
+  "eventType": "SolarStillDesignEvent",
+  "data": {
+    "featureUsed": "GlassRoofTemperature",
+    "actionType": "OptionSelected",
+    "selectedOption": "GlassRoofTemperatureOption2"
+  }
+}
+```
+
+### Example 5: Submitting the Solar Still Design
+
+This event should be captured every time the player clicks the **Submit** button.
+
+The event should record the complete design configuration that the player submitted so that the submitted solution can be reconstructed directly from the gameplay log.
+
+```json
+{
+  "eventType": "SolarStillDesignEvent",
+  "data": {
+    "featureUsed": "Submit",
+    "actionType": "DesignSubmitted",
+    "designSelections": {
+      "roofStyle": "RoofStyleOption3",
+      "extraCovering": "ExtraCoveringOption1",
+      "glassRoofTemperature": "GlassRoofTemperatureOption1"
+    }
+  }
+}
+```
+
+### Recommended Event Structure Summary
+
+#### Design-option interaction
+
+```json
+{
+  "eventType": "SolarStillDesignEvent",
+  "data": {
+    "featureUsed": "RoofStyle | ExtraCovering | GlassRoofTemperature",
+    "actionType": "OptionSelected",
+    "selectedOption": "...",
+    "previousSelection": "..."
+  }
+}
+```
+
+`previousSelection` should only be included when the player changes an existing selection.
+
+#### Design submission
+
+```json
+{
+  "eventType": "SolarStillDesignEvent",
+  "data": {
+    "featureUsed": "Submit",
+    "actionType": "DesignSubmitted",
+    "designSelections": {
+      "roofStyle": "...",
+      "extraCovering": "...",
+      "glassRoofTemperature": "..."
+    }
+  }
+}
+```
+
